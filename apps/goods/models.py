@@ -15,7 +15,7 @@ class GoodsCategory(models.Model):
     name = models.CharField(default="", max_length=30, verbose_name="类别名", help_text="类别名")
     # verbose_name后台管理显示 ，help_text生产文档时
     code = models.CharField(default="", max_length=30, verbose_name="类别code", help_text="类别code")
-    desc = models.CharField(default="", verbose_name="类别描述", help_text="类别描述")           # 简单描述
+    desc = models.CharField(default="", max_length=200, verbose_name="类别描述", help_text="类别描述")           # 简单描述
     category_type = models.IntegerField(choices=CATEGORY_TYPE, verbose_name="类目级别", help_text="类别级别")
     parent_category = models.ForeignKey("self", null=True, blank=True, verbose_name="父类目级", help_text="父目录",
                                         on_delete=models.SET_NULL, related_name="sub_cat")
