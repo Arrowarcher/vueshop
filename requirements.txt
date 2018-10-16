@@ -1,0 +1,15 @@
+Django
+django-filter
+djangorestframework
+Markdown
+mysqlclient
+Pillow
+django-crispy-forms
+django-import-export
+django-reversion
+django-formtools
+future
+httplib2
+six
+xlwt
+xlsxwriter
