@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
     'user_operation.apps.UserOperationConfig',
-    'crispy_forms'
+    'crispy_forms',
     'xadmin',
 ]
 
@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'food',
         'USER': 'root',
-        'PASSWORD': 'jxkj',
+        'PASSWORD': 'jxkj123',
         'HOST': '127.0.0.1',
         'PORT': 3306,
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
