@@ -78,7 +78,7 @@ class AdminSplitDateTime(forms.SplitDateTimeWidget):
             # print(_(u'Today')) 今天
             # return input_html
             return mark_safe('''<div class="datetime clearfix"  style="line-height:2"><div class="input-group date bootstrap-datepicker"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>%s
-                             <span class="input-group-btn" style="width: 100%%;white-space: nowrap;vertical-align: middle;"><button class="btn btn-default" type="button">%s</button></span></div>
+                             <span class="input-group-btn" style="width: 100%%"><button class="btn btn-default" type="button">%s</button></span></div>
                              <div class="input-group time bootstrap-clockpicker"><span class="input-group-addon"><i class="fa fa-clock-o">
                              </i></span>%s<span class="input-group-btn"><button class="btn btn-default" type="button">%s</button></span></div></div>''' % (input_html[0]+'>', _(u'Today'), input_html[1]+'>', _(u'Now')))
         else:
