@@ -1,6 +1,6 @@
-from rest_framework import generics, mixins, viewsets
+from rest_framework import generics, mixins, viewsets, filters
 from rest_framework.pagination import PageNumberPagination
-from django_filters.rest_framework import  DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 
 from goods.filters import GoodsFilter
 from .serializers import GoodsSerializer
@@ -17,15 +17,24 @@ class GoodsPagination(PageNumberPagination):
 
 class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
-    商品列表页
+    商品列表页，分页，搜索，排序
     """
 
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
+
     pagination_class = GoodsPagination
-    filter_backends = (DjangoFilterBackend,)    # 记得，
+
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter,)    # 记得，否则没有过滤器按钮
     # filter_fields = ('name', 'shop_price')
     filter_class = GoodsFilter
+    search_fields = ('name', 'goods_brief', 'goods_desc')
+    ordering_fields = ('sold_num', 'add_time')
+    # '^' 以指定内容开始.
+    # '=' 完全匹配
+    # '@' 全文搜索（目前只支持Django的MySQL后端）
+    # '$' 正则搜索
+
     # def get_queryset(self):
     #     queryset = Goods.objects.all()
     #     price_min = self.request.query_params.get('price_min', 0)
