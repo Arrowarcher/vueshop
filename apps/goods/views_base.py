@@ -13,6 +13,7 @@ class GoodsListView(View):
         """
         json_list = []
         goods = Goods.objects.all()[:10]
+        # 原始列表页，自己序列化
         # for good in goods:
         #     json_dict = {}
         #     json_dict["name"] = good.name
@@ -21,6 +22,7 @@ class GoodsListView(View):
             # json_dict["add_time"] = good.add_time     datetime不能序列化
             # json_list.append(json_dict)
 
+        # 介绍model_to_dict
         # from django.forms.models import  model_to_dict
         # for good in goods:
         #     json_dict = model_to_dict(good)

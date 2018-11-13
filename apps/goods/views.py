@@ -3,14 +3,15 @@ from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 
 from goods.filters import GoodsFilter
-from .serializers import GoodsSerializer
+from .serializers import GoodsSerializer, CategorySerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response     # 比Django的强大
 
-from .models import Goods
+from .models import Goods, GoodsCategory
+
 
 class GoodsPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 12
     page_size_query_param = 'page_size'
     page_query_param = "p"
     max_page_size = 100
@@ -29,7 +30,7 @@ class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     # filter_fields = ('name', 'shop_price')
     filter_class = GoodsFilter
     search_fields = ('name', 'goods_brief', 'goods_desc')
-    ordering_fields = ('sold_num', 'add_time')
+    ordering_fields = ('sold_num', 'shop_price')
     # '^' 以指定内容开始.
     # '=' 完全匹配
     # '@' 全文搜索（目前只支持Django的MySQL后端）
@@ -50,3 +51,15 @@ class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     #     goods = Goods.objects.all()[:10]
     #     goods_serializer = GoodsSerializer(goods, many=True)        # 类似Django的forms，但是可以序列化为json
     #     return Response(goods_serializer.data)
+
+
+class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    """
+    list:
+        商品分类列表数据
+    """
+    queryset = GoodsCategory.objects.filter(category_type=1)
+    serializer_class = CategorySerializer
+
+
+

@@ -22,11 +22,15 @@ import xadmin
 from vueshop.settings import MEDIA_ROOT
 from django.views.static import serve
 
-from goods.views import GoodsViewSet
+from goods.views import GoodsViewSet, CategoryViewSet
 
 router = DefaultRouter()
 # 配置goods的url
-router.register(r'goods', GoodsViewSet, base_name='')   # views中取消queryset属性，采用get_queryset()方法，则必须加这个
+router.register(r'goods', GoodsViewSet, base_name='goods')   # views中取消queryset属性，采用get_queryset()方法，则必须加这个
+
+# 配置category的url
+router.register(r'categorys', CategoryViewSet, base_name='categorys')
+
 
 # goods_list = GoodsViewSet.as_view({
 #     'get': 'list',
