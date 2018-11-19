@@ -1,4 +1,5 @@
 from rest_framework import generics, mixins, viewsets, filters
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -25,6 +26,9 @@ class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = GoodsSerializer
 
     pagination_class = GoodsPagination
+
+    # 配置auth非全局
+    # authentication_classes = (TokenAuthentication,)
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter,)    # 记得，否则没有过滤器按钮
     # filter_fields = ('name', 'shop_price')

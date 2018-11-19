@@ -18,19 +18,24 @@ Including another URLconf
 from django.conf.urls import url, include
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
+from rest_framework_jwt.views import obtain_jwt_token
+
 import xadmin
+from users.views import SmsCodeViewset
 from vueshop.settings import MEDIA_ROOT
 from django.views.static import serve
 
 from goods.views import GoodsViewSet, CategoryViewSet
+from rest_framework.authtoken import views
 
 router = DefaultRouter()
 # 配置goods的url
-router.register(r'goods', GoodsViewSet, base_name='goods')   # views中取消queryset属性，采用get_queryset()方法，则必须加这个
+router.register(r'goods', GoodsViewSet, base_name='goods')  # views中取消queryset属性，采用get_queryset()方法，则必须加这个
 
 # 配置category的url
 router.register(r'categorys', CategoryViewSet, base_name='categorys')
 
+router.register(r'codes', SmsCodeViewset, base_name='codes')
 
 # goods_list = GoodsViewSet.as_view({
 #     'get': 'list',
@@ -38,8 +43,8 @@ router.register(r'categorys', CategoryViewSet, base_name='categorys')
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
-    url(r'^api-auth/',include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^media/(?P<path>.*)$', serve,{"document_root": MEDIA_ROOT}),       # 直接的图片链接需要配置
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),  # 直接的图片链接需要配置
 
     # 商品列表页
     # url(r'goods/$', GoodsListView.as_view(), name="goods-list"),
@@ -48,4 +53,10 @@ urlpatterns = [
     url(r'^', include(router.urls)),
 
     url(r'docs/', include_docs_urls(title="慕学生鲜")),
+
+    # drf自带的token认证模式
+    url(r'^api-token-auth/', views.obtain_auth_token),
+
+    # jwt的认证接口
+    url(r'^login/', obtain_jwt_token),
 ]
