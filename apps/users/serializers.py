@@ -33,4 +33,4 @@ class SmsSerializer(serializers.Serializer):
 
         return mobile
 
-class UserSerializer(serializers.ModelSerializer):
+# class UserSerializer(serializers.ModelSerializer):

@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'vueshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'food',
+        'NAME': 'django2',
         'USER': 'root',
-        'PASSWORD': 'jxkj123',
+        'PASSWORD': 'liuxuan',
         'HOST': '127.0.0.1',
         'PORT': 3306,
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
