@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'vueshop.urls'
 
 TEMPLATES = [
@@ -89,9 +90,9 @@ WSGI_APPLICATION = 'vueshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django2',
+        'NAME': 'vueshop',
         'USER': 'root',
-        'PASSWORD': 'liuxuan',
+        'PASSWORD': 'jxkj123',
         'HOST': '127.0.0.1',
         'PORT': 3306,
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}

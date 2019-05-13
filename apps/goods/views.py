@@ -13,7 +13,7 @@ from .models import Goods, GoodsCategory
 
 class GoodsPagination(PageNumberPagination):
     page_size = 12
-    page_size_query_param = 'page_size'
+    page_size_query_param = 'page_size'    # 可以按照这个设置的字符串来指定获取的数量
     page_query_param = "p"
     max_page_size = 100
 

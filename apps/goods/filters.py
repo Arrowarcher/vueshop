@@ -10,8 +10,8 @@ class GoodsFilter(django_filters.rest_framework.FilterSet):
     """
     商品的过滤类
     """
-    price_min = django_filters.NumberFilter(name='shop_price', lookup_expr='gte')
-    price_max = django_filters.NumberFilter(name='shop_price', lookup_expr='lte')
+    pricemin = django_filters.NumberFilter(name='shop_price', lookup_expr='gte')
+    pricemax = django_filters.NumberFilter(name='shop_price', lookup_expr='lte')
     name = django_filters.CharFilter(name='name', lookup_expr='icontains')          # 忽略大小写包含
     top_category = django_filters.NumberFilter(method='top_category_filter')
 
@@ -21,4 +21,4 @@ class GoodsFilter(django_filters.rest_framework.FilterSet):
 
     class Meta:
         model = Goods
-        fields = ['price_min', 'price_max', 'name']     # 没用？
+        fields = ['pricemin', 'pricemax', 'name']     # 没用？
