@@ -7,7 +7,6 @@ from goods.filters import GoodsFilter
 from .serializers import GoodsSerializer, CategorySerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response     # 比Django的强大
-
 from .models import Goods, GoodsCategory
 
 
@@ -35,6 +34,9 @@ class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     filter_class = GoodsFilter
     search_fields = ('name', 'goods_brief', 'goods_desc')
     ordering_fields = ('sold_num', 'shop_price')
+
+    def list(self, request, *args, **kwargs):
+         return super().list(request, *args, **kwargs)
     # '^' 以指定内容开始.
     # '=' 完全匹配
     # '@' 全文搜索（目前只支持Django的MySQL后端）

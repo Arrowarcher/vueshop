@@ -11,7 +11,7 @@ class YunPian(object):
         parmas = {
             'apikey': self.api_key,
             'mobile': mobile,
-            'text': '【生鲜网】您的验证码是{code}'.format(code=code),   # 云片网审核的模板内容
+            'text': '【生鲜网】您的验证码是{code},如非本人操作，请忽略本短信'.format(code=code),   # 云片网审核的模板内容
         }
 
         response = requests.post(self.single_send_url, data=parmas)

@@ -10,7 +10,7 @@ from rest_framework import viewsets, status
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 
-from users.serializers import SmsSerializer
+from users.serializers import SmsSerializer, UserRegSerializer
 from utils.yunp import YunPian
 from vueshop.settings import APIKEY
 from .models import VerifyCode
@@ -31,7 +31,7 @@ class CustomBackend(ModelBackend):
             return None
 
 
-class SmsCodeViewset(CreateModelMixin, viewsets.GenericViewSet):
+class SmsCodeViewSet(CreateModelMixin, viewsets.GenericViewSet):
     """
     发送短信验证码
     """
@@ -72,7 +72,27 @@ class SmsCodeViewset(CreateModelMixin, viewsets.GenericViewSet):
                 'mobile': mobile
             }, status=status.HTTP_201_CREATED)
 
-# class UserViewset(CreateModelMixin, viewsets.GenericViewSet):
-#     """
-#     用户
-#     """
+class UserViewSet(CreateModelMixin, viewsets.GenericViewSet):
+    """
+    用户
+    """
+    serializer_class = UserRegSerializer
+    queryset = User.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = self.perform_create(serializer)
+
+        re_dict = serializer.data
+        from rest_framework_jwt.serializers import jwt_payload_handler
+        from rest_framework_jwt.serializers import jwt_encode_handler
+        payload = jwt_payload_handler(user)
+        re_dict['token'] = jwt_encode_handler(payload)
+        re_dict['name'] = user.name if user.name else user.username
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(re_dict, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        return serializer.save()
