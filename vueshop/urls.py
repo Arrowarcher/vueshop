@@ -21,7 +21,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
-from user_operation.views import UserFavViewSet
+from user_operation.views import UserFavViewSet, LeavingMessageViewSet
 from users.views import SmsCodeViewSet, UserViewSet
 from vueshop.settings import MEDIA_ROOT
 from django.views.static import serve
@@ -41,6 +41,8 @@ router.register(r'codes', SmsCodeViewSet, base_name='codes')
 router.register(r'users',UserViewSet,base_name='users')
 # 收藏
 router.register(r'userfavs',UserFavViewSet,base_name='userfavs')
+# 留言
+router.register(r'messages',LeavingMessageViewSet,base_name='messages')
 # goods_list = GoodsViewSet.as_view({
 #     'get': 'list',
 # })
