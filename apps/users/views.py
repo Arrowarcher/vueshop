@@ -79,7 +79,7 @@ class UserViewSet(CreateModelMixin, mixins.UpdateModelMixin,mixins.RetrieveModel
     """
     用户
     """
-    serializer_class = UserRegSerializer
+    # serializer_class = UserRegSerializer
     queryset = User.objects.all()
     authentication_classes = (JSONWebTokenAuthentication,authentication.SessionAuthentication)
 
